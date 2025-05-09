@@ -12,11 +12,13 @@ import messageRoutes from "./routes/message.route.js"
 const app = express();
 
 dotenv.config();
+
 const PORT = process.env.PORT;
-
+//parse json requests
 app.use(express.json());
+//parse cookies in incoming requests
 app.use(cookieParser());
-
+//route endpoints
 app.use("/api/auth", authRoutes)
 app.use("/api/messages", messageRoutes)
 

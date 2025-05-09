@@ -3,6 +3,7 @@
  import bcrypt from "bcryptjs"
  import cloudinary from "../lib/cloudinary.js";
  export const signup = async (req, res) => {
+    //form validation from information gathered at signup
     const{fullName, email, password} = req.body
     try {
       if(!fullName || !email || !password) {
@@ -16,7 +17,7 @@
       const user = await User.findOne({email});
 
       if (user) return res.status(400).json({ message: "ts email exsts </3"});
-
+      //generating a salt for the received password, then hash
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -37,7 +38,7 @@
           email: newUser.email,
           profilePic: newUser.profilePic,
         });
-      } else {
+      } else { //if already made
         return res.status(400).json({ message: "ts invalid"});
       }
     } catch (error) {
@@ -47,8 +48,9 @@
     }
  };
 
- export const login= async (req, res) => {
+ export const login = async (req, res) => {
     const { email, password } = req.body;
+    //find email then check for password by comparing email pass to given
     try {
       const user = await User.findOne({email})
       
@@ -60,7 +62,7 @@
       if(!isPasswordCorrect) {
         return res.status(400).json({message: "mannn invalid credentials :("});
       }
-
+      //generate another token for the user
       generateToken(user._id, res);
 
       res.status(200).json({
@@ -78,6 +80,7 @@
  
  export const logout = (req, res) => {
     try {
+      //clear the jwt stored
       res.cookie("jwt", "", {maxAge: 0 })
       res.status(200).json({ message: "Logged out successfully" });
     } catch (error) {
@@ -89,13 +92,15 @@
  export const updateProfile = async(req, res) => {
   try {
     const {profilePic} = req.body;
+    //take userId from protectRoute
     const userId = req.user._id;
 
     if(!profilePic) {
       return res.status(400).json({ message: "Profile picture is required"});
     }
-
+    //send to cloudinary, bucket for images
     const uploadResponse = await cloudinary.uploader.upload(profilePic);
+    //new true means it immediately changes the user picture
     const updatedUser = await User.findByIdAndUpdate(userId, {profilePic:uploadResponse.secure_url}, {new:true})
 
     res.status(200).json(updatedUser)
@@ -104,7 +109,7 @@
     res.status(500).json({ message: "Internal server error"});
   }
  };
-
+ //if protectRoute is successful get the user
  export const checkAuth = (req, res) => {
   try {
     res.status(200).json(req.user);
