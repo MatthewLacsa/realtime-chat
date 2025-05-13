@@ -6,7 +6,7 @@ import LoginPage from "./pages/LoginPage"
 import SettingsPage from "./pages/SettingsPage"
 import ProfilePage from "./pages/ProfilePage"
 
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import { useAuthStore } from "./store/useAuthStore"
 import { useEffect } from "react"
 
@@ -31,7 +31,7 @@ const App = () => {
 
         <Navbar />
         <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login"/> } />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/settings" element={<SettingsPage />} />
