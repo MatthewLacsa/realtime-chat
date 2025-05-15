@@ -1,6 +1,6 @@
 import {React, useState} from 'react'
 import { useAuthStore } from '../store/useAuthStore';
-import {MessageSquare} from "lucide-react"
+import {MessageSquare, User} from "lucide-react"
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -54,7 +54,7 @@ const SignUpPage = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default SignUpPage
