@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: "retro",
+  themes:"light",
+  "dark",
+  "cupcake",
+  "bumblebee",
+  "emerald",
+  "corporate",
+  "synthwave",
+  "retro",
   "cyberpunk",
   "valentine",
   "halloween",
