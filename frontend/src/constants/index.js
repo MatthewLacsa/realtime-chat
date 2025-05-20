@@ -1,6 +1,13 @@
-@import "tailwindcss";
-@plugin "daisyui" {
-  themes: "retro",
+
+export const THEMES = [
+  "light",
+  "dark",
+  "cupcake",
+  "bumblebee",
+  "emerald",
+  "corporate",
+  "synthwave",
+  "retro",
   "cyberpunk",
   "valentine",
   "halloween",
@@ -24,5 +31,5 @@
   "winter",
   "dim",
   "nord",
-  "sunset";
-}
+  "sunset",
+];
