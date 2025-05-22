@@ -55,7 +55,7 @@
       const user = await User.findOne({email})
       
       if(!user) {
-        return res.status(400).json({message: "mannn invalid credentials :("});
+        return res.status(400).json({message: "mannn invalid email :("});
       }
 
       const isPasswordCorrect = await bcrypt.compare(password, user.password);
