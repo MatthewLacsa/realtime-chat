@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { useChatStore } from '../store/useChatStore';
-import {X, Image} from "lucide-react";
+import {X, Image, Send} from "lucide-react";
 const MessageInput = () => {
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
@@ -54,6 +54,13 @@ const MessageInput = () => {
           </button>
             
         </div>
+        <button
+          type="submit"
+          className="btn btn-sm btn-circle"
+          disabled={!text.trim() && !imagePreview}
+          >
+            <Send size={22}/>
+          </button>
       </form>
     </div>
   )
