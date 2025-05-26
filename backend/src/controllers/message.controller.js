@@ -1,5 +1,6 @@
 import User from "../models/user.models.js";
 import Message from "../models/message.models.js";
+import cloudinary from "../lib/cloudinary.js"
 //get the users to chat except yourself
 export const getUsersForSidebar = async(req, res) => {
     try {
@@ -21,8 +22,8 @@ export const getMessages = async(req, res) => {
        //this makes you the sender and the other end is receiver or vice versa
        const messages = await Message.find({
         $or:[
-            {senderId:myId, receiverId: userToChatId},
-            {sendId: userToChatId, receiverId:myId}
+            {senderId: myId, receiverId: userToChatId},
+            {senderId: userToChatId, receiverId: myId}
         ]
        })
        //success
