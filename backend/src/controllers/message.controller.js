@@ -1,6 +1,7 @@
 import User from "../models/user.models.js";
 import Message from "../models/message.models.js";
 import cloudinary from "../lib/cloudinary.js"
+import { getReceiverSocketId } from "../lib/socket.js";
 //get the users to chat except yourself
 export const getUsersForSidebar = async(req, res) => {
     try {
@@ -56,7 +57,12 @@ export const sendMessage = async(req, res) => {
         //save the message
         await newMessage.save();
 
-        //todo: realtime func goes here using socket.io
+
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
+
         res.status(201).json(newMessage);
 
     } catch (error) {
