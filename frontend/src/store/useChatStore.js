@@ -62,7 +62,7 @@ export const useChatStore = create((set, get) => ({
         const socket =  useAuthStore.getState().socket;
         socket.off("newMessage");
     },   
-    /**Change things up on this later */
+
     setSelectedUser: (selectedUser) => set({selectedUser}),
 
 }));
