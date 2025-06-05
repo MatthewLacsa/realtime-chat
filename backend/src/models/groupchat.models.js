@@ -1,23 +1,26 @@
 import mongoose from "mongoose";
 
-const messageSchema = new mongoose.Schema(
+const groupchatSchema = new mongoose.Schema(
     {
-        senderId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
+        groupName: {
+            type: String,
             required: true,
         },
-        receiverId: {
+        members: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-            required: true,
+        }],
+        messages: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Message"
+        }],
+        createdAt: {
+            type: Date,
+            default: Date.now,
         },
-        text: {
-            type: String,
-        },
-        image: {
-            type: String,
-        },
+        expiringAt: {
+            type: Date
+        }
     }, {timestamps: true}
 );
 
