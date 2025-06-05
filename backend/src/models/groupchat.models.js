@@ -6,6 +6,10 @@ const groupchatSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+        },
         members: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
