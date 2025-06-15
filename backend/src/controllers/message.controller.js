@@ -16,7 +16,7 @@ export const getUsersForSidebar = async(req, res) => {
         res.status(500).json({ error: "Internal Server Error"});
     }
 };
-
+//update this to also include group chat ids
 export const getMessages = async(req, res) => {
     try {
        const {id: userToChatId } = req.params
@@ -35,7 +35,7 @@ export const getMessages = async(req, res) => {
         res.status(500).json({error: "Internal server error"});
     }
 };
-
+//update this to also include groupchat ids
 export const sendMessage = async(req, res) => {
     try {
         const {text, image} = req.body;
